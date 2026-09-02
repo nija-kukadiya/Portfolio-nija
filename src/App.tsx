@@ -13,6 +13,7 @@ import {
   Copy,
   Check
 } from 'lucide-react';
+import profileImg from '/nija_profile.jpg';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -227,7 +228,7 @@ export default function App() {
             <div className="bg-[#131b2e] border border-white/10 rounded-2xl p-6 text-center relative shadow-2xl max-w-sm w-full">
               <div className="relative w-44 h-44 mx-auto mb-5 rounded-2xl overflow-hidden border-2 border-[#38bdf8] shadow-[0_0_20px_rgba(56,189,248,0.25)]">
                 <img 
-                  src="/nija_profile.jpg" 
+                  src={profileImg} 
                   alt="Nija Kukadiya" 
                   className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300"
                 />
