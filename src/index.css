@@ -1,7 +1,100 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode in Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* Light Theme Overrides (When .dark class is NOT present) */
+html:not(.dark) {
+  color-scheme: light;
+}
+
+html:not(.dark) body {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* Nav Bar */
+html:not(.dark) nav {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Cards & Sections */
+html:not(.dark) .bg-\[\#131b2e\] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+html:not(.dark) .bg-\[\#0d1220\] {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+}
+
+html:not(.dark) .bg-\[\#0b0f19\] {
+  background-color: #f8fafc !important;
+}
+
+/* Borders */
+html:not(.dark) .border-white\/10 {
+  border-color: #e2e8f0 !important;
+}
+html:not(.dark) .border-white\/5 {
+  border-color: #f1f5f9 !important;
+}
+
+/* Background pill tags & buttons */
+html:not(.dark) .bg-white\/5 {
+  background-color: #f1f5f9 !important;
+  color: #334155 !important;
+  border-color: #e2e8f0 !important;
+}
+
+html:not(.dark) .hover\:bg-white\/10:hover {
+  background-color: #e2e8f0 !important;
+}
+
+/* Typography Overrides */
+html:not(.dark) .text-white {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .text-\[\#f1f5f9\] {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .text-slate-400 {
+  color: #475569 !important;
+}
+
+html:not(.dark) .text-slate-300 {
+  color: #334155 !important;
+}
+
+html:not(.dark) .text-slate-200 {
+  color: #1e293b !important;
+}
+
+/* Buttons with filled gradient text should stay dark on gradient */
+html:not(.dark) .bg-gradient-to-r .text-\[\#0b0f19\],
+html:not(.dark) a.bg-gradient-to-r,
+html:not(.dark) button.bg-gradient-to-r {
+  color: #0b0f19 !important;
+}
+
+/* Orange badges / tags / accents readability in light mode */
+html:not(.dark) .text-\[\#f97316\] {
+  color: #ea580c !important;
+}
+html:not(.dark) .bg-\[\#f97316\]\/10 {
+  background-color: rgba(249, 115, 22, 0.12) !important;
+}
+html:not(.dark) .border-\[\#f97316\]\/20 {
+  border-color: rgba(249, 115, 22, 0.3) !important;
 }

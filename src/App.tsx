@@ -15,7 +15,9 @@ import {
   Download,
   Search,
   Zap,
-  Sparkles
+  Sparkles,
+  Moon,
+  Sun
 } from 'lucide-react';
 import profileImg from '/nija_profile.jpg';
 
@@ -24,6 +26,29 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [projectFilter, setProjectFilter] = useState('all');
+
+  // Theme toggle
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('theme');
+      if (stored) return stored === 'dark';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return true;
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+      root.classList.remove('light');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      root.classList.remove('dark');
+      root.classList.add('light');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,7 +88,7 @@ export default function App() {
   const filteredProjects = projectFilter === 'all' ? projects : projects.filter(p => p.category.includes(projectFilter));
 
   return (
-    <div className="min-h-screen bg-[#0b0f19] text-[#f1f5f9] font-sans selection:bg-[#f97316] selection:text-[#0b0f19]">
+    <div className="min-h-screen font-sans selection:bg-[#f97316] selection:text-[#0b0f19] transition-colors duration-300" style={{backgroundColor: isDark ? '#0b0f19' : '#f8fafc', color: isDark ? '#f1f5f9' : '#0f172a'}}>
 
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0b0f19]/85 backdrop-blur-md border-b border-white/10 px-6 py-4 transition-all">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
@@ -79,7 +104,14 @@ export default function App() {
               </a>
             ))}
           </div>
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={() => setIsDark(!isDark)}
+              className="p-2 rounded-full border border-white/10 text-slate-300 hover:text-white hover:border-[#f97316]/40 transition-all"
+              aria-label="Toggle theme"
+            >
+              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
             <a href="#contact" className="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-md bg-gradient-to-r from-[#f97316] to-[#fbbf24] text-[#0b0f19] hover:opacity-90 transition-opacity shadow-[0_4px_20px_rgba(249,115,22,0.2)]">Get in touch</a>
           </div>
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-slate-300 hover:text-white p-1">
@@ -91,6 +123,19 @@ export default function App() {
             {['home', 'skills', 'experience', 'projects', 'contact'].map(id => (
               <a key={id} href={`#${id}`} onClick={() => setMobileMenuOpen(false)} className="text-slate-300 hover:text-white text-base font-medium capitalize">{id}</a>
             ))}
+            <div className="flex items-center justify-between pt-2 border-t border-white/10">
+              <span className="text-sm font-medium text-slate-300">Theme</span>
+              <button
+                onClick={() => {
+                  setIsDark(!isDark);
+                  setMobileMenuOpen(false);
+                }}
+                className="p-2 rounded-full border border-white/10 text-slate-300 hover:text-white"
+                aria-label="Toggle theme"
+              >
+                {isDark ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
+            </div>
             <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="inline-block text-center w-full py-2.5 text-sm font-semibold rounded-md bg-gradient-to-r from-[#f97316] to-[#fbbf24] text-[#0b0f19]">Get in touch</a>
           </div>
         )}
