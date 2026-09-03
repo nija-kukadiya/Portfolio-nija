@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import {
   Building2,
@@ -20,10 +21,16 @@ import {
   Cloud,
   Layers,
   Terminal,
+  GraduationCap,
 } from 'lucide-react';
 import profileImg from '/nija_profile.jpg';
 
 export default function App() {
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" as const } }
+  };
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -105,7 +112,7 @@ export default function App() {
             <span>NIJA KUKADIYA</span>
           </a>
           <div className="hidden md:flex items-center gap-8">
-            {[{ id: 'home', label: 'Home' }, { id: 'skills', label: 'Skills' }, { id: 'experience', label: 'Experience' }, { id: 'projects', label: 'Projects' }, { id: 'contact', label: 'Contact' }].map(link => (
+            {[{ id: 'home', label: 'Home' }, { id: 'skills', label: 'Skills' }, { id: 'achievements', label: 'Achievements' }, { id: 'experience', label: 'Experience' }, { id: 'projects', label: 'Projects' }, { id: 'resume', label: 'Resume' }, { id: 'contact', label: 'Contact' }].map(link => (
               <a key={link.id} href={`#${link.id}`} className={`text-sm font-medium transition-colors relative py-1 ${activeSection === link.id ? 'text-[#F8FAFC]' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}>
                 {link.label}
                 {activeSection === link.id && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#F97316]"></span>}
@@ -152,7 +159,7 @@ export default function App() {
       </nav>
 
       {/* Hero */}
-      <section id="home" className="pt-36 pb-20 px-6">
+      <motion.section id="home" className="pt-36 pb-20 px-6" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-8 flex flex-col order-2 lg:order-1">
             <div className="inline-flex items-center font-mono text-xs text-[#94A3B8] mb-6 tracking-wide">
@@ -168,6 +175,7 @@ export default function App() {
               <span className="flex items-center gap-2"><MapPin size={16} className="text-[#94A3B8]" /> Surat, India (Remote Available)</span>
               <span className="flex items-center gap-2"><Building2 size={16} className="text-[#94A3B8]" /> Senior Software Engineer / Team Lead, HVG Infotech</span>
             </div>
+
             <div className="flex flex-wrap items-center gap-4">
               <a href="#contact" className="px-6 py-3 text-sm font-medium rounded-md bg-[#F97316] text-white hover:bg-[#EA580C] transition-colors">
                 Get in touch
@@ -228,10 +236,10 @@ export default function App() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Skills */}
-      <section id="skills" className="py-20 px-6 border-t border-[#1E293B]">
+      <motion.section id="skills" className="py-20 px-6 border-t border-[#1E293B]" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <div className="font-mono text-xs text-[#94A3B8] mb-2 uppercase tracking-wide">Technical capabilities</div>
@@ -240,7 +248,13 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {/* AI & GenAI */}
-            <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: 0, ease: "easeOut" }}
+              className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 hover:border-[#F97316]/40 hover:-translate-y-1 transition-all duration-300 group"
+            >
               <h3 className="text-base font-semibold text-[#F8FAFC] mb-4 flex items-center gap-2">
                 <Terminal size={18} className="text-[#94A3B8]" /> AI & GenAI
               </h3>
@@ -249,10 +263,16 @@ export default function App() {
                   <span key={i} className="font-mono text-xs px-2.5 py-1 rounded bg-[#0B1120] border border-[#1E293B] text-[#94A3B8]">{skill}</span>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Frontend */}
-            <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+              className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 hover:border-[#F97316]/40 hover:-translate-y-1 transition-all duration-300 group"
+            >
               <h3 className="text-base font-semibold text-[#F8FAFC] mb-4 flex items-center gap-2">
                 <Code size={18} className="text-[#94A3B8]" /> Frontend
               </h3>
@@ -261,10 +281,16 @@ export default function App() {
                   <span key={i} className="font-mono text-xs px-2.5 py-1 rounded bg-[#0B1120] border border-[#1E293B] text-[#94A3B8]">{skill}</span>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Backend */}
-            <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+              className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 hover:border-[#F97316]/40 hover:-translate-y-1 transition-all duration-300 group"
+            >
               <h3 className="text-base font-semibold text-[#F8FAFC] mb-4 flex items-center gap-2">
                 <Server size={18} className="text-[#94A3B8]" /> Backend
               </h3>
@@ -273,10 +299,16 @@ export default function App() {
                   <span key={i} className="font-mono text-xs px-2.5 py-1 rounded bg-[#0B1120] border border-[#1E293B] text-[#94A3B8]">{skill}</span>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Database */}
-            <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.30000000000000004, ease: "easeOut" }}
+              className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 hover:border-[#F97316]/40 hover:-translate-y-1 transition-all duration-300 group"
+            >
               <h3 className="text-base font-semibold text-[#F8FAFC] mb-4 flex items-center gap-2">
                 <Database size={18} className="text-[#94A3B8]" /> Database
               </h3>
@@ -285,10 +317,16 @@ export default function App() {
                   <span key={i} className="font-mono text-xs px-2.5 py-1 rounded bg-[#0B1120] border border-[#1E293B] text-[#94A3B8]">{skill}</span>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Cloud & DevOps */}
-            <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+              className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 hover:border-[#F97316]/40 hover:-translate-y-1 transition-all duration-300 group"
+            >
               <h3 className="text-base font-semibold text-[#F8FAFC] mb-4 flex items-center gap-2">
                 <Cloud size={18} className="text-[#94A3B8]" /> Cloud & DevOps
               </h3>
@@ -297,10 +335,16 @@ export default function App() {
                   <span key={i} className="font-mono text-xs px-2.5 py-1 rounded bg-[#0B1120] border border-[#1E293B] text-[#94A3B8]">{skill}</span>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Payments & Integrations */}
-            <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+              className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 hover:border-[#F97316]/40 hover:-translate-y-1 transition-all duration-300 group"
+            >
               <h3 className="text-base font-semibold text-[#F8FAFC] mb-4 flex items-center gap-2">
                 <Layers size={18} className="text-[#94A3B8]" /> Integrations & Testing
               </h3>
@@ -309,10 +353,10 @@ export default function App() {
                   <span key={i} className="font-mono text-xs px-2.5 py-1 rounded bg-[#0B1120] border border-[#1E293B] text-[#94A3B8]">{skill}</span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          <div className="mt-8 bg-[#111827] border border-[#1E293B] rounded-xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.6, delay: 0.6 }} className="mt-8 bg-[#111827] border border-[#1E293B] rounded-xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-5 hover:border-[#F97316]/30 transition-colors">
             <div className="w-12 h-12 rounded-lg bg-[#0B1120] border border-[#1E293B] flex items-center justify-center shrink-0">
               <Zap size={20} className="text-[#F97316]" />
             </div>
@@ -320,13 +364,41 @@ export default function App() {
               <h3 className="text-base font-bold text-[#F8FAFC] mb-1">Engineering Mindset</h3>
               <p className="text-sm text-[#94A3B8] leading-relaxed">Continuously exploring modern frameworks, AI technologies, cloud platforms, and engineering practices to build scalable and reliable products.</p>
             </div>
-          </div>
+          </motion.div>
 
         </div>
-      </section>
+      </motion.section>
+
+
+      {/* Achievements */}
+      <motion.section id="achievements" className="py-20 px-6 border-t border-[#1E293B]" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-12">
+            <div className="font-mono text-xs text-[#F97316] mb-2 uppercase tracking-wide">Key Metrics & Impact</div>
+            <h2 className="text-3xl font-bold text-[#F8FAFC]">Achievements</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 relative overflow-hidden group hover:border-[#F97316]/40 transition-colors">
+              <div className="text-3xl font-extrabold text-[#F97316] mb-2">35%↓</div>
+              <h3 className="text-base font-bold text-[#F8FAFC] mb-2">Production Defect Reduction</h3>
+              <p className="text-xs text-[#94A3B8] leading-relaxed">Achieved through strict TypeScript typing, automated Jest/Playwright testing pipelines, and code review standards.</p>
+            </div>
+            <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 relative overflow-hidden group hover:border-[#F97316]/40 transition-colors">
+              <div className="text-3xl font-extrabold text-[#F97316] mb-2">40%↑</div>
+              <h3 className="text-base font-bold text-[#F8FAFC] mb-2">Load Performance & SSR</h3>
+              <p className="text-xs text-[#94A3B8] leading-relaxed">Improved page load speeds across Next.js SaaS platforms using SSR, code splitting, and smart caching strategies.</p>
+            </div>
+            <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 relative overflow-hidden group hover:border-[#F97316]/40 transition-colors">
+              <div className="text-3xl font-extrabold text-[#F97316] mb-2">12+</div>
+              <h3 className="text-base font-bold text-[#F8FAFC] mb-2">Enterprise & SaaS Products</h3>
+              <p className="text-xs text-[#94A3B8] leading-relaxed">Architected and delivered scalable web applications for international clients across FinTech, AI, Real Estate, and Gifting.</p>
+            </div>
+          </div>
+        </div>
+      </motion.section>
 
       {/* Experience */}
-      <section id="experience" className="py-20 px-6 border-t border-[#1E293B]">
+      <motion.section id="experience" className="py-20 px-6 border-t border-[#1E293B]" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
         <div className="max-w-4xl mx-auto">
           <div className="mb-12">
             <div className="font-mono text-xs text-[#94A3B8] mb-2 uppercase tracking-wide">Professional Journey</div>
@@ -372,11 +444,27 @@ export default function App() {
               </div>
             </div>
           </div>
+
+          {/* Education Block */}
+          <div className="mt-12 bg-[#111827] border border-[#1E293B] rounded-xl p-6 sm:p-8">
+            <h3 className="text-xl font-bold text-[#F8FAFC] mb-6 flex items-center gap-2">
+              <GraduationCap size={20} className="text-[#F97316]" /> Education
+            </h3>
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <h4 className="text-base font-bold text-[#F8FAFC]">Bachelor of Computer Applications (BCA)</h4>
+                  <p className="text-xs text-[#94A3B8] mt-1">Veer Narmad South Gujarat University, Surat</p>
+                </div>
+                <span className="font-mono text-xs text-[#94A3B8] bg-[#0B1120] px-3 py-1 rounded border border-[#1E293B]">2018 - 2021</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Projects */}
-      <section id="projects" className="py-20 px-6 border-t border-[#1E293B]">
+      <motion.section id="projects" className="py-20 px-6 border-t border-[#1E293B]" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 text-center md:text-left">
             <div className="font-mono text-xs text-[#F97316] mb-3 uppercase tracking-wider">PROJECTS</div>
@@ -398,7 +486,14 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProjects.map((project, index) => (
-              <div key={index} className="bg-[#111827] border border-[#1E293B] rounded-xl overflow-hidden flex flex-col hover:border-[#334155] transition-all duration-300 group hover:shadow-lg">
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                className="bg-[#111827] border border-[#1E293B] rounded-xl overflow-hidden flex flex-col hover:border-[#F97316]/40 hover:-translate-y-1.5 transition-all duration-300 group shadow-lg hover:shadow-[#F97316]/10"
+              >
                 {project.image ? (
                   <div className="w-full h-[200px] overflow-hidden bg-[#0B1120] border-b border-[#1E293B] relative">
                     <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
@@ -446,14 +541,52 @@ export default function App() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
+
+
+      {/* Resume Section */}
+      <motion.section id="resume" className="py-20 px-6 border-t border-[#1E293B]" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
+        <div className="max-w-4xl mx-auto bg-[#111827] border border-[#1E293B] rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 shadow-2xl">
+          <div className="w-full md:w-1/3 shrink-0">
+            <div className="relative border border-[#1E293B] bg-[#0B1120] rounded-xl p-4 shadow-xl group hover:border-[#F97316]/40 transition-colors">
+              <div className="w-full aspect-[1/1.4] bg-[#111827] rounded border border-[#1E293B] p-4 flex flex-col justify-between text-[9px] font-mono text-[#64748B] relative overflow-hidden">
+                <div className="absolute -right-6 -bottom-6 w-24 h-24 bg-[#F97316]/10 rounded-full blur-xl"></div>
+                <div className="border-b border-[#1E293B] pb-3">
+                  <div className="font-bold text-[#F8FAFC] text-[11px]">NIJA KUKADIYA</div>
+                  <div className="text-[#F97316]">Senior Full-Stack Engineer</div>
+                </div>
+                <div className="space-y-2 my-3">
+                  <div className="h-1.5 bg-[#1E293B] rounded w-full"></div>
+                  <div className="h-1.5 bg-[#1E293B] rounded w-4/5"></div>
+                  <div className="h-1.5 bg-[#1E293B] rounded w-5/6"></div>
+                  <div className="h-1.5 bg-[#1E293B] rounded w-2/3"></div>
+                </div>
+                <div className="border-t border-[#1E293B] pt-3 flex justify-between items-center text-[8px]">
+                  <span>5+ Yrs Experience</span>
+                  <span className="text-[#F97316] font-bold">PDF RESUME</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full md:w-2/3">
+            <div className="font-mono text-xs text-[#F97316] mb-2 uppercase tracking-wide">RESUME & DOCUMENTATION</div>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#F8FAFC] mb-3">Download Official Resume</h2>
+            <p className="text-sm text-[#94A3B8] leading-relaxed mb-6">
+              For a detailed breakdown of technical architecture, key achievements, and full professional experience, you can download the trusted PDF version below.
+            </p>
+            <a href="/nija_kukadiya_resume.pdf" download="Nija_Kukadiya_Resume.pdf" className="inline-flex items-center gap-2.5 px-6 py-3 text-sm font-medium rounded-md bg-[#F97316] text-white hover:bg-[#EA580C] transition-colors shadow-lg shadow-[#F97316]/10">
+              <Download size={16} /> Download Resume (PDF)
+            </a>
+          </div>
+        </div>
+      </motion.section>
 
       {/* Contact */}
-      <section id="contact" className="py-20 px-6 border-t border-[#1E293B]">
+      <motion.section id="contact" className="py-20 px-6 border-t border-[#1E293B]" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <div className="font-mono text-xs text-[#94A3B8] mb-2 uppercase tracking-wide">Next Steps</div>
@@ -492,7 +625,7 @@ export default function App() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <footer className="py-8 px-6 border-t border-[#1E293B] text-center text-xs text-[#94A3B8]">
         <div className="max-w-6xl mx-auto">&copy; 2026 Nija Kukadiya. Built with React & TypeScript.</div>
