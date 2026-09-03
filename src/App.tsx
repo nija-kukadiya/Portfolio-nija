@@ -79,12 +79,18 @@ export default function App() {
   };
 
   const projects = [
-    { title: 'VinoVoss', category: 'saas', tag: 'AI & SaaS Platform', desc: 'AI-powered wine discovery platform providing personalized recommendations, smart search, food pairings, tasting notes, and interactive quizzes.', tech: ['Next.js', 'Python', 'Tailwind CSS', 'shadcn/ui', 'Zod', 'Zustand'] },
-    { title: 'Rentest.ai', category: 'analytics', tag: 'Real Estate & Pricing AI', desc: 'Data-driven rental price estimation platform providing property rent estimates, comparable market analysis, customizable reports, and real estate insights.', tech: ['Next.js', 'API Routes', 'Redux', 'AWS Lambda', 'Tailwind CSS'] },
-    { title: 'MetadataWorks', category: 'enterprise', tag: 'Data Governance Platform', desc: 'Enterprise metadata catalog platform supporting data discovery, governance, secure access control, compliance reporting, and FAIR data management.', tech: ['Next.js', 'Styled Components', 'Grommet', 'Redux'] },
-    { title: 'Slabstack', category: 'enterprise', tag: 'SaaS CRM & Operations', desc: 'Sales & business management SaaS platform supporting CRM, dynamic pricing, quoting, sales forecasting, and business workflows for heavy building materials producers.', tech: ['Next.js', 'Golang', 'Tailwind CSS'] },
-    { title: 'ARTDAI', category: 'analytics', tag: 'Art Market Intelligence', desc: 'Data-driven art market intelligence platform providing auction analytics, artwork listings, comparable sales, market insights, and interactive visualizations.', tech: ['Next.js', 'Data Visualization', 'REST APIs'] },
-    { title: 'VERSD', category: 'saas', tag: 'Experience Platform', desc: 'Experience management platform supporting event management, bookings, RSVPs, Stripe payments, recurring subscriptions, dashboards, and customer engagement.', tech: ['Next.js', 'React Native', 'Stripe'] }
+    { title: 'goFintel (UN)', category: 'enterprise', tag: 'Financial Intelligence Platform', desc: 'Next-generation financial intelligence platform developed with the UN to help identify and investigate suspicious financial activities related to money laundering and terrorist financing.', tech: ['React.js', 'TypeScript', 'Redux', 'REST APIs', 'Data Visualization'], url: 'https://www.un.org/counterterrorism/en/events/soft-launch-gofintel-software', image: '/Project_images/gofintel.jpg' },
+    { title: 'Kalshi', category: 'saas', tag: 'Prediction Market & Exchange', desc: 'Regulated prediction market and financial exchange to trade event contracts based on real-world events. Includes market discovery, real-time data, trading, and portfolio management.', tech: ['Next.js', 'TypeScript', 'Redux', 'REST APIs', 'Data Visualization'], url: 'https://kalshi.com', image: '/Project_images/kalshi.jpg' },
+    { title: 'CloudRemedy', category: 'enterprise', tag: 'Managed Cloud Services', desc: 'Managed cloud services platform providing Private Cloud, Cloud Backup, and Disaster Recovery solutions, featuring an online portal for service configuration and management.', tech: ['React.js', 'Redux', 'REST APIs'], url: '#', image: '/Project_images/cloudremedy.jpg' },
+    { title: 'VinoVoss', category: 'saas', tag: 'AI Wine Discovery Platform', desc: 'AI-powered virtual sommelier providing personalized wine suggestions, smart search, food pairings, tasting notes, and interactive quizzes.', tech: ['Next.js', 'Python', 'shadcn/ui', 'Tailwind CSS', 'Zod', 'Zustand'], url: 'https://vinovoss.com', image: '/Project_images/vinovoss.png' },
+    { title: 'Rentest.ai', category: 'analytics', tag: 'Real Estate Estimation Platform', desc: 'Data-driven rental price estimation platform providing fast, accurate rent estimates, comparable market rents, and detailed rent reports for real estate professionals.', tech: ['Next.js', 'Tailwind CSS', 'Redux', 'AWS Lambda'], url: 'https://rentest.ai', image: '/Project_images/rentest.png' },
+    { title: 'FairPrice E-Gift Voucher', category: 'enterprise', tag: 'Online Gifting Platform', desc: 'Online gifting platform by FairPrice in Singapore offering curated gifts and hampers. Designed and developed the e-Gift Voucher experience with a user-friendly interface for digital gift vouchers.', tech: ['Next.js'], url: 'https://www.gift.fairprice.com.sg', image: '/Project_images/fairprice-e-gift-voucher.jpg' },
+    { title: 'ArtBank (ARTDAI)', category: 'analytics', tag: 'Art Market Intelligence', desc: 'Art-market intelligence and analytics platform providing auction data, artist analytics, market indexes, and collection-management tools for art professionals.', tech: ['Next.js'], url: 'https://www.artd.ai', image: '/Project_images/artbank.png' },
+    { title: 'TourneyMaster', category: 'saas', tag: 'Sports Management Platform', desc: 'Sports tournament management platform for team registration, scheduling, brackets, game management, and communication for various sports.', tech: ['React.js'], url: 'https://www.tourneymaster.org', image: '/Project_images/tourneymaster.jpg' },
+    { title: 'MetadataWorks', category: 'enterprise', tag: 'Data Governance Platform', desc: 'Data management platform that helps organizations catalog, discover, and govern their data efficiently to make it FAIR. Features secure data access, reporting, and governance workflows.', tech: ['Next.js', 'Styled Components', 'Grommet', 'Redux'], url: 'https://metadataworks.ai', image: '' },
+    { title: 'Slabstack', category: 'enterprise', tag: 'Sales & Business Management', desc: 'Cloud-based platform for concrete, aggregates, and asphalt producers offering CRM, dynamic pricing, quoting, and sales forecasting to streamline operations.', tech: ['Next.js', 'Golang', 'Tailwind CSS'], url: 'https://slabstack.com/', image: '' },
+    { title: 'MY Visa USA', category: 'saas', tag: 'Visa & Immigration Platform', desc: 'Online visa and immigration consultation platform helping customers with applications, documentation, and interview preparation across countries like the USA, Canada, and the UK.', tech: ['Next.js'], url: 'https://myvisa-usa.com', image: '' },
+    { title: 'VERSD', category: 'saas', tag: 'Experience Management Platform', desc: 'Experience-management platform for studios and creators to manage events, classes, bookings, payments, subscriptions, RSVPs, and customer data.', tech: ['Next.js', 'React Native'], url: 'https://www.versd.co', image: '' }
   ];
 
   const filteredProjects = projectFilter === 'all' ? projects : projects.filter(p => p.category.includes(projectFilter));
@@ -372,35 +378,73 @@ export default function App() {
       {/* Projects */}
       <section id="projects" className="py-20 px-6 border-t border-[#1E293B]">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-10">
-            <div className="font-mono text-xs text-[#94A3B8] mb-2 uppercase tracking-wide">Selected Work</div>
-            <h2 className="text-3xl font-bold text-[#F8FAFC]">Projects</h2>
+          <div className="mb-12 text-center md:text-left">
+            <div className="font-mono text-xs text-[#F97316] mb-3 uppercase tracking-wider">PROJECTS</div>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#F8FAFC] mb-4">A selection of products and platforms.</h2>
+            <p className="text-[#94A3B8] max-w-2xl text-lg">I've helped design and engineer across SaaS, enterprise, fintech, and data domains.</p>
           </div>
 
-          <div className="flex flex-wrap gap-2 mb-8">
-            {[{ id: 'all', label: 'All' }, { id: 'saas', label: 'SaaS' }, { id: 'analytics', label: 'Analytics' }, { id: 'enterprise', label: 'Enterprise' }].map(tab => (
+          <div className="flex flex-wrap gap-2 mb-10">
+            {[{ id: 'all', label: 'All' }, { id: 'saas', label: 'SaaS' }, { id: 'enterprise', label: 'Enterprise' }, { id: 'analytics', label: 'AI & Data' }].map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setProjectFilter(tab.id)}
-                className={`px-4 py-2 rounded-md text-xs font-medium transition-colors border ${projectFilter === tab.id ? 'bg-[#1E293B] text-[#F8FAFC] border-[#1E293B]' : 'bg-transparent text-[#94A3B8] border-transparent hover:bg-[#111827] hover:text-[#F8FAFC]'}`}
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-colors border ${projectFilter === tab.id ? 'bg-[#F97316] text-[#F8FAFC] border-[#F97316]' : 'bg-[#111827] text-[#94A3B8] border-[#1E293B] hover:border-[#94A3B8] hover:text-[#F8FAFC]'}`}
               >
                 {tab.label}
               </button>
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProjects.map((project, index) => (
-              <div key={index} className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 flex flex-col justify-between hover:border-[#94A3B8] transition-colors group">
-                <div>
-                  <div className="mb-3">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-[#94A3B8] bg-[#0B1120] px-2 py-1 rounded border border-[#1E293B]">{project.tag}</span>
+              <div key={index} className="bg-[#111827] border border-[#1E293B] rounded-xl overflow-hidden flex flex-col hover:border-[#334155] transition-all duration-300 group hover:shadow-lg">
+                {project.image ? (
+                  <div className="w-full h-[200px] overflow-hidden bg-[#0B1120] border-b border-[#1E293B] relative">
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+                    {project.url && project.url !== '#' && (
+                      <a href={project.url} target="_blank" rel="noreferrer" className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#111827]/80 backdrop-blur-sm border border-[#1E293B] flex items-center justify-center text-[#F8FAFC] opacity-0 group-hover:opacity-100 transition-all hover:bg-[#F97316] hover:border-[#F97316]">
+                        <ExternalLink size={14} />
+                      </a>
+                    )}
                   </div>
-                  <h3 className="text-xl font-bold text-[#F8FAFC] mb-2 group-hover:text-[#F97316] transition-colors">{project.title}</h3>
-                  <p className="text-sm text-[#94A3B8] leading-relaxed mb-6">{project.desc}</p>
-                </div>
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-[#1E293B]">
-                  {project.tech.map((t, i) => <span key={i} className="font-mono text-[11px] text-[#94A3B8]">{t}{i < project.tech.length - 1 ? ' · ' : ''}</span>)}
+                ) : (
+                  <div className="w-full h-[200px] bg-gradient-to-br from-[#1E293B] to-[#0B1120] border-b border-[#1E293B] relative flex items-center justify-center overflow-hidden">
+                    <span className="text-6xl font-bold text-[#334155] opacity-30 select-none group-hover:scale-110 transition-transform duration-700 tracking-tighter">{project.title.substring(0, 2).toUpperCase()}</span>
+                    {project.url && project.url !== '#' && (
+                      <a href={project.url} target="_blank" rel="noreferrer" className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#111827]/80 backdrop-blur-sm border border-[#1E293B] flex items-center justify-center text-[#F8FAFC] opacity-0 group-hover:opacity-100 transition-all hover:bg-[#F97316] hover:border-[#F97316]">
+                        <ExternalLink size={14} />
+                      </a>
+                    )}
+                  </div>
+                )}
+                <div className="p-5 flex flex-col justify-between flex-grow">
+                  <div>
+                    <div className="mb-2 flex justify-between items-center">
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] font-semibold">{project.tag}</span>
+                      {!project.image && project.url && project.url !== '#' && (
+                        <a href={project.url} target="_blank" rel="noreferrer" className="text-[#94A3B8] hover:text-[#F97316] transition-colors">
+                          <ExternalLink size={14} />
+                        </a>
+                      )}
+                    </div>
+                    {project.url && project.url !== '#' ? (
+                      <a href={project.url} target="_blank" rel="noreferrer" className="block text-xl font-bold text-[#F8FAFC] mb-2 group-hover:text-[#F97316] transition-colors flex items-center gap-2">
+                        {project.title}
+                        {!project.image && <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />}
+                      </a>
+                    ) : (
+                      <h3 className="text-xl font-bold text-[#F8FAFC] mb-2">{project.title}</h3>
+                    )}
+                    <p className="text-sm text-[#94A3B8] leading-relaxed mb-4 line-clamp-1" title={project.desc}>{project.desc}</p>
+                  </div>
+                  <div className="flex flex-wrap items-center pt-4 border-t border-[#1E293B]">
+                    {project.tech.map((t, i) => (
+                      <span key={i} className="font-mono text-[11px] text-[#94A3B8]">
+                        {t}{i < project.tech.length - 1 ? <span className="mx-1.5 opacity-40">·</span> : ''}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
