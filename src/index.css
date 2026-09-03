@@ -88,3 +88,12 @@ html:not(.dark) .bg-\[\#F97316\]\/10 {
 html:not(.dark) .border-\[\#F97316\]\/20 {
   border-color: rgba(249, 115, 22, 0.3) !important;
 }
+
+/* Fix Project Card Placeholder Gradient in Light Mode */
+html:not(.dark) .bg-gradient-to-br.from-\[\#1E293B\].to-\[\#0B1120\] {
+  background: linear-gradient(to bottom right, #e2e8f0, #f8fafc) !important;
+}
+
+html:not(.dark) .text-\[\#334155\] {
+  color: #94a3b8 !important;
+}
